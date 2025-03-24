@@ -117,13 +117,14 @@ class ManufacturerListViewTest(TestCase):
                 response,
                 f'href="{update_url}"'
             )
+            delete_url = reverse(
+                "taxi:manufacturer-delete",
+                args=[manufacturer.id]
+            )
 
             self.assertContains(
                 response,
-                f'href="{reverse(
-                    "taxi:manufacturer-delete",
-                    args=[manufacturer.id]
-                )}"'
+                f'href="{delete_url}"'
             )
 
     def test_returns_nothing_for_bad_search(self):

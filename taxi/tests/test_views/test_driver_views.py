@@ -478,18 +478,22 @@ class DriverDetailsViewTest(TestCase):
         self.client.force_login(Driver.objects.get(pk=1))
         response = self.client.get(DETAIL_VIEW_URL)
 
-        self.assertContains(
-            response,
-            f'href="{reverse(
-                "taxi:driver-update",
-                args=[car.id]
-            )}"'
+        update_url = reverse(
+            "taxi:driver-update",
+            args=[car.id]
         )
 
         self.assertContains(
             response,
-            f'href="{reverse(
-                "taxi:driver-delete",
-                args=[car.id]
-            )}"'
+            f'href="{update_url}"'
+        )
+
+        delete_url = reverse(
+            "taxi:driver-delete",
+            args=[car.id]
+        )
+
+        self.assertContains(
+            response,
+            f'href="{delete_url}"'
         )
