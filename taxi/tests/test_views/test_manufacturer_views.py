@@ -109,12 +109,13 @@ class ManufacturerListViewTest(TestCase):
         response = self.client.get(LIST_VIEW_URL)
 
         for manufacturer in manufacturers:
+            update_url = reverse(
+                "taxi:manufacturer-update",
+                args=[manufacturer.id]
+            )
             self.assertContains(
                 response,
-                f'href="{reverse(
-                    "taxi:manufacturer-update",
-                    args=[manufacturer.id]
-                )}"'
+                f'href="{update_url}"'
             )
 
             self.assertContains(

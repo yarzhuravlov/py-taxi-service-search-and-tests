@@ -118,12 +118,10 @@ class CarListViewTest(TestCase):
         response = self.client.get(LIST_VIEW_URL)
 
         for car in cars:
+            detail_url = reverse("taxi:car-detail", args=[car.id])
             self.assertContains(
                 response,
-                f'href="{reverse(
-                    "taxi:car-detail",
-                    args=[car.id]
-                )}"'
+                f'href="{detail_url}"'
             )
 
     def test_returns_nothing_for_bad_search(self):
